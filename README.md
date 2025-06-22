@@ -5,7 +5,7 @@ This repository contains the minimal IsaacLab image to work within a devcontaine
 
 First tried to do the Dockerfile from the last IsaacLab image provided, but didn't manage to compile it. **This version starts from "nvcr.io/nvidia/isaac-sim:4.5.0 image and install isaac lab from repository.** 
 
-# My Set up
+# Testing set up
 
 Host OS:
 
@@ -26,15 +26,16 @@ Hardware:
 
 For my setup I observed the following behaviours: 
 
-1. Starting the container takes lot of time to download and build all the images (15Gb). Be patient
+1. Starting the container takes lot of time to download and build all the images **(15Gb)**. Be patient. 
+
+    **Warning:** The image of this **DevContainer weights 27Gb, be careful when iterating frustrated container builds**, this can take your disk space very rapidly.  
 
 2. First time isaac-sim GUI openning takes lot of time (~10 mins). If no error arrise, don't worry just be patient. Don't worry about the pop up saying isaac-sim is not responding.
 
 3. Once images are downloaded and built and isaac-sim is cached, start the environment takes just seconds. 
 
 # Prerequisites
-ref: https://isaac-sim.github.io/IsaacLab/main/source/deployment/docker.html
-
+*ref: https://isaac-sim.github.io/IsaacLab/main/source/deployment/docker.html*
 1. **install docker**
 
     ``` bash
@@ -62,8 +63,9 @@ ref: https://isaac-sim.github.io/IsaacLab/main/source/deployment/docker.html
 
 2. **Install NVIDIA Container Toolkit for hardware acceleration**
     
-    ref: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
-    [No CUDA installation is needed in host]
+    *ref: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html*
+    
+    *[No CUDA installation is needed in host]*
 
 
     ``` bash
@@ -79,7 +81,7 @@ ref: https://isaac-sim.github.io/IsaacLab/main/source/deployment/docker.html
 
 # Run the dev container
 
-**Warning:** The image of this DevContainer weights 32Gb, be careful when iterating frustrated builds, this can take your disk space very rapidly.  
+**Warning:** The image of this DevContainer weights 27Gb, be careful when iterating frustrated builds, this can take your disk space very rapidly.  
 
 1. If necessary, enable xhost for GUI fordwarding.
 
@@ -110,7 +112,9 @@ ref: https://isaac-sim.github.io/IsaacLab/main/source/deployment/docker.html
 
 **Once evething is installed, you can start playing with your Isaac Sim & Isaac Lab installation.** 
 
-Isaac Sim 
+Isaac Sim installation is at `/isaac-sim` folder in the root directory of the container.
+
+Isaac Lab installation is inside isaac-sim installation at `/isaac-sim/IsaacLab` folder from the root directory of the container.
 
 For example you can start creating an asset with:
 
@@ -119,7 +123,7 @@ For example you can start creating an asset with:
 
     ref: https://isaac-sim.github.io/IsaacLab/main/source/setup/quickstart.html#
 
-    At workspace directory:
+    At `/workspace` directory run (you can change *extrange_robot* for the name of your package):
 
     ```bash
     ./isaac-sim/IsaacLab/isaaclab.sh --new source/extrange_robot/

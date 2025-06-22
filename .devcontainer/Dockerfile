@@ -30,21 +30,17 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y python3-pip python-is-python3 ssh neovim \
     git nano cmake build-essential zenity libx11-dev libgl1-mesa-glx libegl1-mesa
 
-RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y python3-pip python-is-python3 ssh neovim git nano cmake build-essential && \
-    pip install torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu118 && \
-    pip install --upgrade pip && \
-    pip install isaaclab[isaacsim,all]==2.1.0 --extra-index-url https://pypi.nvidia.com && \
-    echo "[INFO] Cloning Isaac Lab..." && \
-    if [ ! -d "IsaacLab" ]; then \
-        git clone https://github.com/isaac-sim/IsaacLab.git; \
-    else \
-        echo "[INFO] Isaac Lab already exists"; \
-    fi && \
-    echo "[INFO] Installing Isaac Lab..." && \
-    cd IsaacLab && \
-    ./isaaclab.sh --install
+#   install pytorch and CUDA
+RUN pip install torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu118 && \
+    pip install --upgrade pip 
 
+# install isaac lab
+RUN git clone https://github.com/isaac-sim/IsaacLab.git
+RUN ln -sf /isaac-sim IsaacLab/_isaac_sim
+RUN cd IsaacLab && ./isaaclab.sh --install
+RUN echo "alias python='/isaac-sim/python.sh'" >> /root/.bashrc && \
+    echo "alias pip='/isaac-sim/python.sh -m pip'" >> /root/.bashrc
+    
 ENV SHELL /bin/bash
 
 CMD ["/bin/bash"]
