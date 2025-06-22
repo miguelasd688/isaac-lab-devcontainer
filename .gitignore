@@ -1,0 +1,67 @@
+# === C++ ===
+**/cmake-build*/
+**/build*/
+**/*.so
+**/*.log
+
+# === Omniverse / Isaac Sim ===
+**/*.dmp
+**/.thumbs
+logs/
+runs/
+recordings/
+*.tmp
+*.cache
+
+# === USD Assets ===
+# Include source assets (robot models)
+!source/extrange_robot/assets/**/*.usd
+!source/extrange_robot/assets/**/*.usda
+!source/extrange_robot/assets/**/*.usdc
+
+# Ignore USDs generated elsewhere
+outputs/**/*.usd
+logs/**/*.usd
+
+# === Python ===
+**/__pycache__/
+**/.pytest_cache/
+**/*.pyc
+**/*.pyo
+**/*.egg-info/
+**/.mypy_cache/
+
+# === IDE & Editor ===
+**/.idea/
+**/.vscode/
+!.vscode/settings.json
+
+# === Docker ===
+**/*.sif
+docker/.container.cfg
+docker/cluster/exports/
+
+# === Output data ===
+outputs/
+videos/
+wandb/
+.neptune/
+
+# === Hydra ===
+# Hydra working directory outputs
+**/multirun/
+**/outputs/
+**/.hydra/
+
+# === Checkpoints and RL ===
+**/runs/
+**/logs/
+**/checkpoints/
+**/recordings/
+
+# === Misc ===
+.DS_Store
+.pretrained_checkpoints/
+datasets/
+
+IsaacLab/

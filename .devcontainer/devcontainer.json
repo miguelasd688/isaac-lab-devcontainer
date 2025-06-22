@@ -1,0 +1,54 @@
+{
+  "name": "Isaac Lab Development Container",
+  "remoteUser": "root",
+  "privileged": true,
+  "workspaceFolder": "/workspace",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "DOCKER_IMAGE": "nvcr.io/nvidia/isaac-sim",
+      "IMAGE_VERSION": "4.5.0"
+    }
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "containerEnv": {
+    "DISPLAY": "${env:DISPLAY}",
+    "ACCEPT_EULA": "Y",
+    "PRIVACY_CONSENT": "Y"
+  },
+  "runArgs": [
+    "--gpus", "all",
+    "--network=host",
+    "--privileged",
+    "--cap-add=NET_ADMIN",
+    "-e", "DISPLAY=${env:DISPLAY}",
+    "-e", "ACCEPT_EULA=Y",
+    "-e", "PRIVACY_CONSENT=Y"
+  ],
+  "mounts": [
+    "source=${localEnv:HOME}/.Xauthority,target=/root/.Xauthority,type=bind",
+    "source=${localEnv:HOME}/docker/isaac-sim/cache/kit,target=/isaac-sim/kit/cache,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/docker/isaac-sim/cache/ov,target=/root/.cache/ov,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/docker/isaac-sim/cache/pip,target=/root/.cache/pip,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/docker/isaac-sim/cache/glcache,target=/root/.cache/nvidia/GLCache,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/docker/isaac-sim/cache/computecache,target=/root/.nv/ComputeCache,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/docker/isaac-sim/logs,target=/root/.nvidia-omniverse/logs,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/docker/isaac-sim/data,target=/root/.local/share/ov/data,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/docker/isaac-sim/documents,target=/root/Documents,type=bind,consistency=cached",
+    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
+    "source=/dev/dri,target=/dev/dri,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cpptools-themes",
+        "twxs.cmake",
+        "donjayamanne.python-extension-pack",
+        "eamodio.gitlens"
+      ]
+    }
+  },
+  "postCreateCommand": "sh ./.devcontainer/postCreate.sh"
+}
