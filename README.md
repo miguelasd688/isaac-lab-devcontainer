@@ -65,7 +65,7 @@ For my setup I observed the following behaviours:
     
     *ref: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html*
     
-    *[No CUDA installation is needed in host]*
+    This provides infrastructure to use GPU in a container *[No CUDA installation is needed in host]*
 
 
     ``` bash
@@ -81,7 +81,7 @@ For my setup I observed the following behaviours:
 
 # Run the dev container
 
-**Warning:** The image of this DevContainer weights 27Gb, be careful when iterating frustrated builds, this can take your disk space very rapidly.  
+**Warning:** The image of this DevContainer weights 27Gb, be careful when iterating frustrated container builds, this can take your disk space very rapidly.  
 
 1. If necessary, enable xhost for GUI fordwarding.
 
